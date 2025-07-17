@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod'; 
 import { useNavigate } from "react-router-dom";
 import { CircleAlert } from 'lucide-react';
+import { useState } from "react";
 
 type FieldValues = z.infer <typeof schema>
 const schema = z.object({
@@ -13,10 +14,14 @@ const schema = z.object({
   lastName : z.string().min(6,"This field is required"),
 
 });
+
+
+
+
 const Register = () => {
 
 const navigate = useNavigate()
-
+const [error,setError] = useState(false)
 
 const handleLogin = () =>{
     navigate("/Login")
@@ -31,11 +36,28 @@ const handleLogin = () =>{
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-   creatNewLogin.mutate(data);
+   const response = await creatNewLogin.mutateAsync(data);
    console.log(data)
+
+  if (response.error) {
+setError(true)
+
+setTimeout(()=>{
+  setError(false)
+  console.log(response.error)
+},2000)
+  
+  }else{
     navigate("/Login")
 
+  }
+
+
   };
+
+
+
+
 
   const creatNewLogin = useMutation({
     mutationFn: (data: FieldValues) =>
@@ -51,19 +73,22 @@ const handleLogin = () =>{
     },
   });
 
-//   if (creatNewLogin.data?.error) {
-//     alert(creatNewLogin.data.error);
-//   }
 
   return (
     <div className="w-screen bg-[#f1f5f9] h-screen flex items-center justify-center">
+     {error && ( 
+     <div className="top-20  border-1 border-gray-200  flex items-center justify-center bg-gray-200  w-[20%]  rounded-xl absolute h-30">
+      <span className="text-xl font-medium  ">User already exists</span>
+     </div>
+     )}
+    
       <form
         className=" flex flex-col pt-5 px-10 bg-white rounded-[.5rem] w-[35%] shadow-gray-200 shadow-sm"
         onSubmit={handleSubmit(onSubmit)}
       >
         <h3 className="text-3xl font-bold pb-5 text-center">CREATE ACCOUNT</h3>
-          <div className="flex gap-3 ">
-              <label className="mb-4">
+          <div className="flex gap-3   ">
+              <label className="mb-4 w-full">
           <p className="text-[.9rem] font-medium pb-2">
             <span className="text-red-600">*</span> First Name
           </p>
@@ -77,9 +102,9 @@ const handleLogin = () =>{
             {errors.firstName && <div className="flex items-center gap-1"><CircleAlert size={17}/>{errors.firstName.message}</div>}
           </div>
         </label>
-          <label className="mb-4">
+          <label className="mb-4 w-full">
           <p className="text-[.9rem] font-medium pb-2">
-            <span className="text-red-600">*</span> Email
+            <span className="text-red-600">*</span> Last Name
           </p>
           <input
             {...register("lastName")}

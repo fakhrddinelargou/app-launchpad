@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod'; 
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 type FieldValues = z.infer <typeof schema>
@@ -15,6 +16,7 @@ const Login = () => {
   //   queryKey : ["user"],
   //   queryFn : () => fetch("http://localhost:3000/api/auth/login").then((res) => res.json())
   // })
+  const [error , setError] = useState(false)
   const navigate = useNavigate()
 const handleRegister = ()=>{
 navigate("/register")
@@ -29,8 +31,17 @@ navigate("/register")
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    creatNewLogin.mutate(data);
-    navigate("/profil")
+  const response =  await  creatNewLogin.mutateAsync(data);
+  if(response.error){
+    console.log(response.error)
+    setError(true)
+    setTimeout(()=>{
+      setError(false)
+    },2000)
+  }else{
+
+    navigate("/Home")
+  }
     return data;
   };
 
@@ -48,12 +59,16 @@ navigate("/register")
     },
   });
 
-  if (creatNewLogin.data?.error) {
-    alert(creatNewLogin.data.error);
-  }
+
+
 
   return (
     <div className="w-screen  h-screen flex items-center justify-center">
+           {error && ( 
+     <div className="top-20  border-1 border-gray-200  flex items-center justify-center bg-gray-200  w-[20%]  rounded-xl absolute h-30">
+      <span className="text-xl font-medium  ">Invalid credentials</span>
+     </div>
+     )}
       <form
         className=" flex flex-col pt-5 px-10 bg-white rounded-[.5rem] w-[35%] shadow-gray-200 shadow-sm"
         onSubmit={handleSubmit(onSubmit)}
