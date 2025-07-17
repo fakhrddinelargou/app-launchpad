@@ -1,23 +1,18 @@
-import Header from './components/Header';
-import Sections from './components/Sections';
-import './index.css'
+import Layout from "./components/Layout";
+import Sections from "./components/Sections";
+// import Dashboard from "./components/pages/Dashboard";
+import Orders from "./components/pages/Orders";
 
-
-
-
-
-function App(){
-
-  
-
-return (
-  <div >
-<Header/>
-    <div className='flex'>
-<Sections/>
-    </div>
-  </div>
-)
+function App() {
+  return (
+    <Layout>
+      <div className="flex">
+        <Sections />
+        {/* هذا مجرد عرض افتراضي، يمكن تغييره */}
+        <Orders />
+      </div>
+    </Layout>
+  );
 }
 
 export default App;

@@ -9,12 +9,16 @@ import Register from './components/Register'
 import App from './App'
 // import App from './App.tsx'
 const router = createBrowserRouter([
+      {
+    path : "/",
+    element : <App/>
+  },
     {
     path : "/Home",
     element : <App/>
   },
   {
-    path : "/",
+    path : "/login",
     element : <Login/>
   },
    {
