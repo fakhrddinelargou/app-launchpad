@@ -1,5 +1,6 @@
 import { House ,ShoppingCart , Package2 , Truck , UsersRound , ChartLine } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 function Sections(){
 
@@ -8,15 +9,16 @@ console.log(section)
 type FeildData = {
     name : string;
     icon : ReactNode;
+    path : string;
 }
-      const menuItems : FeildData[] = [
-    { name: "Dashboard", icon: <House strokeWidth={1.5} size={20} /> },
-    { name: "Orders", icon: <ShoppingCart strokeWidth={1.5} size={20} /> },
-    { name: "Products", icon: <Package2 strokeWidth={1.5} size={20} /> },
-    { name: "Suppliers", icon: <Truck strokeWidth={1.5} size={20} /> },
-    { name: "Customers", icon: <UsersRound strokeWidth={1.5} size={20} /> },
-    { name: "Analytics", icon: <ChartLine strokeWidth={1.5} size={20} /> },
-  ];
+const menuItems: FeildData[] = [
+  { name: "Dashboard", icon: <House strokeWidth={1.5} size={20} />, path: "/dashboard" },
+  { name: "Orders", icon: <ShoppingCart strokeWidth={1.5} size={20} />, path: "/orders" },
+  { name: "Products", icon: <Package2 strokeWidth={1.5} size={20} />, path: "/products" },
+  { name: "Suppliers", icon: <Truck strokeWidth={1.5} size={20} />, path: "/suppliers" },
+  { name: "Customers", icon: <UsersRound strokeWidth={1.5} size={20} />, path: "/customers" },
+  { name: "Analytics", icon: <ChartLine strokeWidth={1.5} size={20} />, path: "/analytics" },
+];
 
     return (
 
@@ -26,7 +28,14 @@ type FeildData = {
     <ul className='flex flex-col  gap-5'>
         {menuItems.map((item )=>  (
             
-            <li key={item.name} onClick={() => setSection(item.name) } className={`flex gap-1 items-center text-[.9rem]  cursor-pointer hover:bg-gray-200 rounded-[.2rem] p-3   font-medium  ${section === item.name ? " text-blue-700  bg-gray-200" : "text-gray-700 hover:bg-gray-200"} `}>{item.icon}{item.name}</li>
+                <Link
+                to={item.path}
+                >
+            <li key={item.name} onClick={() => setSection(item.name) } className={`flex gap-1 items-center text-[.9rem]  cursor-pointer hover:bg-gray-200 rounded-[.2rem] p-3   font-medium  ${section === item.name ? " text-blue-700  bg-gray-200" : "text-gray-700 hover:bg-gray-200"} `}>
+
+                {item.icon}{item.name}
+                </li>
+                </Link>
         )
 
         )}
