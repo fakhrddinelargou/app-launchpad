@@ -22,7 +22,7 @@ const menuItems: FeildData[] = [
 
     return (
 
-        <div className="bg-white  w-[13%] h-[92vh]">
+        <div className="  w-[13%] h-[92vh] bg-[#f1f5f9]">
 
 <nav className="w-full  px-5 pt-5">
     <ul className='flex flex-col  gap-5'>
