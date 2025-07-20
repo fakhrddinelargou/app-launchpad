@@ -12,6 +12,8 @@ import Products from "../../pages/Products"
 import Suppliers from "../../pages/Suppliers"
 import Customers from "../../pages/Customers"
 import Analytics from "../../pages/Analytics"
+import ForgotPassword from "../components/forgotPassword"
+import ResetPassword from "../components/ResetPassword"
 const router = createBrowserRouter([
       {
     path : "/",
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
     {
     path : "/register",
     element : <Register/>
+  },
+  {
+path : "/request-password",
+element : <ForgotPassword/>
+  },
+  {
+path : "/reset-password",
+element : <ResetPassword/>
   },
   {
     path:"/",

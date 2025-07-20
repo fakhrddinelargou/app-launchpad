@@ -10,8 +10,9 @@ type FieldValues = z.infer <typeof schema>
 const schema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password:z.string().min(8 , "The password field is required").max(30 , "The password field is required"),
-  firstName : z.string().min(6,"This field is required"),
-  lastName : z.string().min(6,"This field is required"),
+  firstName : z.string().min(5,"This field is required"),
+  lastName : z.string().min(5,"This field is required"),
+  acceptTerm : z.boolean()
 
 });
 
@@ -150,8 +151,8 @@ setTimeout(()=>{
         </label>
         <label className="text-[.7rem] flex gap-1 py-2 pb-3 pl-1">
 
-<input type="checkbox" />
-<p>I agree all statements in Terms of servise</p>
+<input type="checkbox" {...register("acceptTerm",{required:true})} />
+<p className={`${errors.acceptTerm ?  "text-red-600" : " " }`}>I agree all statements in Terms of servise</p>
         </label>
         <button
           type="submit"

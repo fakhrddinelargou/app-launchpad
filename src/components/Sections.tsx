@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 
 function Sections(){
 
-    const [section,setSection] = useState<string>()
+    const [section,setSection] = useState<string>("Dashboard")
+    
 console.log(section)
 type FeildData = {
     name : string;
@@ -26,12 +27,12 @@ const menuItems: FeildData[] = [
 
 <nav className="w-full  px-5 pt-5">
     <ul className='flex flex-col  gap-5'>
-        {menuItems.map((item )=>  (
+        {menuItems.map((item , index )=>  (
             
                 <Link
                 to={item.path}
                 >
-            <li key={item.name} onClick={() => setSection(item.name) } className={`flex gap-1 items-center text-[.9rem]  cursor-pointer hover:bg-gray-200 rounded-[.2rem] p-3   font-medium  ${section === item.name ? " text-blue-700  bg-gray-200" : "text-gray-700 hover:bg-gray-200"} `}>
+            <li key={index} onClick={() => setSection(item.name) } className={`flex gap-1 items-center text-[.9rem]  cursor-pointer hover:bg-gray-200 rounded-[.2rem] p-3   font-medium  ${section === item.name ? " text-blue-700  bg-gray-200" : "text-gray-700 hover:bg-gray-200"} `}>
 
                 {item.icon}{item.name}
                 </li>

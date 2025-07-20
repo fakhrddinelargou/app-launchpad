@@ -79,9 +79,7 @@ navigate("/register")
             <span className="text-red-600">*</span> Email
           </p>
           <input
-            {...register("email", {
-              required: "fdjfkdsjfdk",
-            })}
+            {...register("email")}
             className="pl-2 shadow-gray-200 shadow-sm border-1 border-gray-300 rounded-[.25rem] py-2 w-full"
             type="email"
             placeholder="demo@example.com"
@@ -95,17 +93,17 @@ navigate("/register")
             <span className="text-red-600">*</span> Password
           </p>
           <input
-            {...register("password", {
-              required: "djasifjsais",
-            })}
+            {...register("password")}
             className="pl-2 shadow-gray-200 shadow-sm border-1 border-gray-300 rounded-[.25rem] py-2 w-full"
             type="password"
             placeholder="password123"
           />
           <div className="pl-1 h-[3vh] text-[.8rem] flex justify-between ">
+            <Link to={"/request-password"}>
             <div className="text-gray-500 text-[.6rem] pt-1 cursor-pointer hover:underline">
               Forgot Password?
             </div>
+            </Link>
             {errors.password && (
               <div className="text-red-600 pr-1">{errors.password.message}</div>
             )}

@@ -1,8 +1,10 @@
+
 import { CircleUserRound } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 
 function  Header(){
+
 
     const navigate = useNavigate()
 
@@ -15,8 +17,9 @@ function  Header(){
         <img src="/logo.png" className="w-50 pl-5 " />
       
     </div>
-    <div>
-        <CircleUserRound size={25} strokeWidth={1.2} className='cursor-pointer' onClick={handleProfil}  />
+    <div onClick={handleProfil} className='flex gap-1 text-[.9rem] items-center font-medium cursor-pointer'>
+        <CircleUserRound size={25} strokeWidth={1.2} />
+
     </div>
   </div>
     )
