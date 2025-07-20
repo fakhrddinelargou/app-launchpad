@@ -1,12 +1,14 @@
 import { House ,ShoppingCart , Package2 , Truck , UsersRound , ChartLine } from 'lucide-react';
-import { useState, type ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+import {  type ReactNode } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 function Sections(){
 
-    const [section,setSection] = useState<string>("Dashboard")
     
-console.log(section)
+    const location = useLocation()
+    const urlName = location.pathname
+    
+
 type FeildData = {
     name : string;
     icon : ReactNode;
@@ -32,7 +34,7 @@ const menuItems: FeildData[] = [
                 <Link
                 to={item.path}
                 >
-            <li key={index} onClick={() => setSection(item.name) } className={`flex gap-1 items-center text-[.9rem]  cursor-pointer hover:bg-gray-200 rounded-[.2rem] p-3   font-medium  ${section === item.name ? " text-blue-700  bg-gray-200" : "text-gray-700 hover:bg-gray-200"} `}>
+            <li key={index}  className={`flex gap-1 items-center text-[.9rem]  cursor-pointer hover:bg-gray-200 rounded-[.2rem] p-3   font-medium  ${urlName === item.path ? " text-blue-700  bg-gray-200" : "text-gray-700 hover:bg-gray-200"} `}>
 
                 {item.icon}{item.name}
                 </li>

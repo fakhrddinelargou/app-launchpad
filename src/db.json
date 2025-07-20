@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "title": "New Message",
+    "description": "You have a new message from John.",
+    "type": "message",
+    "time": "2025-07-20T08:30:00Z",
+    "read": false,
+    "image" : "/user1.png"
+  },
+  {
+    "id": 2,
+    "title": "Payment Received",
+    "description": "You received a payment of $120.",
+    "type": "finance",
+    "time": "2025-07-20T07:15:00Z",
+    "read": true,
+    "image" : "./user2.png"
+  },
+  {
+    "id": 3,
+    "title": "New Follower",
+    "description": "Anna started following you.",
+    "type": "social",
+    "time": "2025-07-18T20:45:00Z",
+    "read": false,
+    "image" : "./user3.png"
+  },
+  {
+    "id": 4,
+    "title": "System Update",
+    "description": "A new update is available.",
+    "type": "system",
+    "time": "2025-07-18T19:00:00Z",
+    "read": true,
+    "image" : "./user4.png"
+  },
+  {
+    "id": 5,
+    "title": "Comment Reply",
+    "description": "James replied to your comment.",
+    "type": "comment",
+    "time": "2025-07-18T14:22:00Z",
+    "read": false,
+    "image" : "./user5.png"
+  },
+  {
+    "id": 6,
+    "title": "Task Completed",
+    "description": "Project X was marked as completed.",
+    "type": "task",
+    "time": "2025-07-17T18:00:00Z",
+    "read": true,
+    "image" : "./user6.png"
+  },
+  {
+    "id": 7,
+    "title": "New Like",
+    "description": "Maria liked your post.",
+    "type": "social",
+    "time": "2025-07-17T10:45:00Z",
+    "read": true,
+    "image" : "./user7.png"
+  },
+  {
+    "id": 8,
+    "title": "Subscription Ending",
+    "description": "Your plan ends in 3 days.",
+    "type": "alert",
+    "time": "2025-07-16T21:30:00Z",
+    "read": false,
+    "image" : "./user8.png"
+  },
+  {
+    "id": 9,
+    "title": "Login Attempt",
+    "description": "Unusual login detected.",
+    "type": "security",
+    "time": "2025-07-16T19:10:00Z",
+    "read": false,
+    "image" : "./user9.png"
+  },
+  {
+    "id": 10,
+    "title": "Event Reminder",
+    "description": "Meeting at 3 PM with team.",
+    "type": "event",
+    "time": "2025-07-16T08:00:00Z",
+    "read": true,
+    "image" : "./user10.png"
+  },
+  {
+    "id": 11,
+    "title": "Weekly Report",
+    "description": "Your performance summary is ready.",
+    "type": "report",
+    "time": "2025-07-15T09:00:00Z",
+    "read": true,
+    "image" : "./user11.png"
+  },
+  {
+    "id": 12,
+    "title": "Password Changed",
+    "description": "Your password was changed successfully.",
+    "type": "security",
+    "time": "2025-07-15T06:45:00Z",
+    "read": true,
+    "image" : "./user12.png"
+  },
+  {
+    "id": 13,
+    "title": "New Task",
+    "description": "You were assigned to task 'Design Update'.",
+    "type": "task",
+    "time": "2025-07-14T17:20:00Z",
+    "read": false,
+    "image" : "./user13.png"
+  },
+  {
+    "id": 14,
+    "title": "Comment Mention",
+    "description": "Ali mentioned you in a comment.",
+    "type": "comment",
+    "time": "2025-07-14T11:30:00Z",
+    "read": false,
+    "image" : "./user14.png"
+  },
+  {
+    "id": 15,
+    "title": "Maintenance Notice",
+    "description": "System will go offline tonight at 2 AM.",
+    "type": "system",
+    "time": "2025-07-13T22:00:00Z",
+    "read": true,
+    "image" : "./user15.png"
+  },
+  {
+    "id": 16,
+    "title": "New Review",
+    "description": "You received a 5-star review!",
+    "type": "feedback",
+    "time": "2025-07-13T19:00:00Z",
+    "read": true,
+    "image" : "./user16.png"
+  },
+  {
+    "id": 17,
+    "title": "Message Sent",
+    "description": "Your message to Sarah has been delivered.",
+    "type": "message",
+    "time": "2025-07-13T14:10:00Z",
+    "read": true,
+    "image" : "./user17.png"
+  },
+  {
+    "id": 18,
+    "title": "Access Request",
+    "description": "New request to access project files.",
+    "type": "alert",
+    "time": "2025-07-12T16:00:00Z",
+    "read": false,
+    "image" : "./user18.png"
+  },
+  {
+    "id": 19,
+    "title": "Post Published",
+    "description": "Your article was published successfully.",
+    "type": "content",
+    "time": "2025-07-12T13:15:00Z",
+    "read": true,
+    "image" : "./user19.png"
+  },
+  {
+    "id": 20,
+    "title": "Profile Update",
+    "description": "Your profile was updated.",
+    "type": "profile",
+    "time": "2025-07-12T09:00:00Z",
+    "read": false,
+    "image" : "./user20.png"
+  }
+]

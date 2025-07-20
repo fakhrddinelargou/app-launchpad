@@ -9,7 +9,7 @@ function  Header(){
     const navigate = useNavigate()
 
     const handleProfil = ()=>{
-        navigate("/profil")
+        navigate("/ProfileInfo")
     }
     return(
          <div className="bg-white border-b-1 border-gray-200 w-screen h-[8vh] flex items-center pr-5 justify-between">
