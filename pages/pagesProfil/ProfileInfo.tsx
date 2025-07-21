@@ -60,11 +60,11 @@ function ProfileInfo(){
     }
 
     return(
-       <div className="w-[80%]  h-full px-6 relative">
-        <div className="flex  justify-between py-5 ">
-            <h1 className="text-2xl font-bold">Personal Information</h1>
+       <div className="w-[80%]  h-full px-10 relative">
+
+            <h1 className="text-2xl font-bold py-5">Personal Information</h1>
         
-        </div>
+        
         <div className="border-y-1 border-gray-200 h-[25vh] flex items-center">
             <img className="w-30 rounded-full" src="./profile.png" alt="avatar" />
 

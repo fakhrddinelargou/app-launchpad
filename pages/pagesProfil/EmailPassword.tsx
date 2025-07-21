@@ -55,7 +55,11 @@ const token = localStorage.getItem('token')
 
 
     return (
-        <div className=" flex items-center justify-center w-[80%] h-full ">
+        <div className=" flex items-center flex-col justify-center w-[80%] h-full ">
+            <h1 className="text-2xl font-bold mr-auto py-5 pl-10  ">Email & Password</h1>
+            <div className=" w-[80%] h-full flex justify-center items-center">
+
+           
 <form className="flex flex-col gap-8 w-[60%]" onSubmit={handleSubmit(onSubmit)}> 
 <label>
 <p>Email</p>
@@ -68,6 +72,7 @@ const token = localStorage.getItem('token')
 <button type="submit" className="ml-auto font-medium text-[.9rem] text-gray-500 ">{isSubmitting ? "...Updating" : "Edait"}</button>
 
 </form>
+ </div>
         </div>
     )
 }

@@ -52,9 +52,9 @@ type Notification = {
 console.log(data)
 
     return (
-        <div className="w-[80%] h-full  p-10">
+        <div className="w-[80%] h-full  px-10">
+            <h1 className="text-2xl font-bold mr-auto py-5   ">Notification</h1>
             <div className="w-full h-full bg-gray-100 rounded-[.8rem] flex flex-col gap-6 p-5 overflow-auto ">
-
                     <span className="text-[.9rem] font-medium text-gray-600">Today</span>
                     <div>
 

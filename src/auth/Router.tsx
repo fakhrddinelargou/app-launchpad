@@ -17,7 +17,7 @@ import ResetPassword from "../components/ResetPassword"
 import LayoutProfile from "./LayoutProfile"
 import ProfileInfo from "../../pages/pagesProfil/ProfileInfo"
 import EmailPassword from "../../pages/pagesProfil/EmailPassword"
-import Notifications from "../../pages/pagesProfil/notification"
+import Notifications from "../../pages/pagesProfil/Notification"
 import Businesses from "../../pages/pagesProfil/Businesses"
 import Integration from "../../pages/pagesProfil/Integration"
 

@@ -39,8 +39,8 @@ const menuItems: FeildData[] = [
             <nav>
                 <ul className="flex flex-col gap-3 pr-10 ">
                     {menuItems.map((item, index) => {return (
-                        <Link to={item.path}>
-                        <li key={index}  className={`hover:bg-gray-100 ${urlName === item.path ? "bg-gray-100" : ""} p-2 text-[.8rem] rounded-[.3rem]  flex items-center gap-2 font-medium`}>{item.icon}{item.name}</li>
+                        <Link to={item.path} key={index}>
+                        <li   className={`hover:bg-gray-100 ${urlName === item.path ? "bg-gray-100" : ""} p-2 text-[.8rem] rounded-[.3rem]  flex items-center gap-2 font-medium`}>{item.icon}{item.name}</li>
                         </Link>
                     )})}
 
