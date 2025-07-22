@@ -7,6 +7,8 @@ import BudgetForm from '../src/components/BudGets';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
+import EditBudgets from '../src/components/EditBudgets';
+import Expenses from '../src/components/Expenses';
 
 
 function Dashboard() {
@@ -14,7 +16,12 @@ function Dashboard() {
 
 const queryClient = useQueryClient()
 const [budget , setBudget] = useState(false)
+const [edit , setEdit] = useState(false)
+
 const [id , setId] = useState("")
+const [put , setPut] = useState("")
+
+console.log(put)
 // const [delet , setDelet] = useState(false)
 
 
@@ -48,6 +55,11 @@ queryClient.invalidateQueries({queryKey:["budgets"]})
 })
 
 
+
+
+
+
+
   type Budget = {
   id: string;
   userId: string;
@@ -66,8 +78,10 @@ console.log(data)
 
 
 
+ {edit && < EditBudgets getId={put} setEdit={setEdit} /> }
 
 {budget && <BudgetForm  setBudget = {setBudget} />}
+
 
 <h1 className="font-bold text-3xl p-5 text-blue-950  border-b-1 border-gray-200 mb-4 ">Dashboard</h1>
 
@@ -97,11 +111,11 @@ console.log(data)
      <tr key={item.id} className="  py-5  hover:bg-gray-200 ">
               <td className="py-2 px-4 text-center ">{item.month}</td>
               <td className="py-2 px-4"><span className='bg-green-600 text-[.8rem] p-1 rounded-[.2rem] text-white'>Revenue</span></td>
-              <td className="py-2 px-4 font-medium">{item.category}</td>
+              <td className="py-2 px-4 font-medium uppercase ">{item.category}</td>
               <td className="py-2 px-4 text-center font-bold"><span className='text-[.8rem] font-medium'>$</span>{item.amount}</td>
               <td className="py-2 px-4 text-center">{item.spent}</td>
 
-                  <td className="py-2 px-10 text-black/50 cursor-pointer">
+                  <td className="py-2 px-10 text-black/50 cursor-pointer" onClick={() => {setPut(item.id); setEdit(true)}} >
 Edit
         </td>
 
@@ -124,6 +138,9 @@ Edit
    </table>
   </div>}
 </div>
+
+<Expenses/>
+
 </div>
 
 <div className="flex gap-5 px-3 ">
