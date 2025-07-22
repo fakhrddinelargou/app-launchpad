@@ -7,11 +7,6 @@ import Login from '../components/Login'
 import Register from '../components/Register'
 import Layout from "./Layout"
 import Dashboard from "../../pages/Dashboard"
-import Orders from "../../pages/Orders"
-import Products from "../../pages/Products"
-import Suppliers from "../../pages/Suppliers"
-import Customers from "../../pages/Customers"
-import Analytics from "../../pages/Analytics"
 import ForgotPassword from "../components/forgotPassword"
 import ResetPassword from "../components/ResetPassword"
 import LayoutProfile from "./LayoutProfile"
@@ -49,31 +44,6 @@ element : <ResetPassword/>
   {
 path:"dashboard",
 element: <Dashboard/>
-
-  },
-    {
-path:"orders",
-element: <Orders/>
-
-  },
-    {
-path:"products",
-element: <Products/>
-
-  },
-      {
-path:"suppliers",
-element: <Suppliers/>
-
-  },
-        {
-path:"customers",
-element: <Customers/>
-
-  },
-        {
-path:"analytics",
-element: <Analytics/>
 
   },
 

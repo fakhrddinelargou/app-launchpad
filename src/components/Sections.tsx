@@ -1,5 +1,6 @@
-import { House ,ShoppingCart , Package2 , Truck , UsersRound , ChartLine } from 'lucide-react';
+import { House  } from 'lucide-react';
 import {  type ReactNode } from 'react';
+
 import { Link, useLocation } from 'react-router-dom';
 
 function Sections(){
@@ -16,16 +17,17 @@ type FeildData = {
 }
 const menuItems: FeildData[] = [
   { name: "Dashboard", icon: <House strokeWidth={1.5} size={20} />, path: "/dashboard" },
-  { name: "Orders", icon: <ShoppingCart strokeWidth={1.5} size={20} />, path: "/orders" },
-  { name: "Products", icon: <Package2 strokeWidth={1.5} size={20} />, path: "/products" },
-  { name: "Suppliers", icon: <Truck strokeWidth={1.5} size={20} />, path: "/suppliers" },
-  { name: "Customers", icon: <UsersRound strokeWidth={1.5} size={20} />, path: "/customers" },
-  { name: "Analytics", icon: <ChartLine strokeWidth={1.5} size={20} />, path: "/analytics" },
+//   { name: "Orders", icon: <ShoppingCart strokeWidth={1.5} size={20} />, path: "/orders" },
+//   { name: "Products", icon: <Package2 strokeWidth={1.5} size={20} />, path: "/products" },
+//   { name: "Suppliers", icon: <Truck strokeWidth={1.5} size={20} />, path: "/suppliers" },
+//   { name: "Customers", icon: <UsersRound strokeWidth={1.5} size={20} />, path: "/customers" },
+//   { name: "Analytics", icon: <ChartLine strokeWidth={1.5} size={20} />, path: "/analytics" },
 ];
 
     return (
 
-        <div className="  w-[13%] h-[92vh] bg-[#f1f5f9]">
+        <div className="  w-[13%] h-auto  bg-[#f1f5f9]">
+
 
 <nav className="w-full  px-5 pt-5">
     <ul className='flex flex-col  gap-5'>
