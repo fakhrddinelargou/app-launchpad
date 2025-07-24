@@ -1,7 +1,7 @@
 
 import { useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import { Bell, CalendarOff } from 'lucide-react';
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import BudgetForm from '../src/components/BudGets';
 
 import {
@@ -56,9 +56,24 @@ queryClient.invalidateQueries({queryKey:["budgets"]})
 
 
 
+const getDashboard = useMutation({
+  mutationFn : () => fetch("http://localhost:3000/api/analytics/dashboard" ,{
+    method : "GET",
+    headers : {
+      "Authorization" : `Bearer ${token}`,
+      "Content-type" : "application/json"
+    }
+  }).then((res) => res.json()),
+
+})
+
+useEffect(()=>{
+  getDashboard.mutateAsync()
+},[])
 
 
 
+console.log(getDashboard.data)
 
   type Budget = {
   id: string;

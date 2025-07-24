@@ -7,10 +7,11 @@ import z from "zod";
 
 
 type Props = {
-  setValue: React.Dispatch<React.SetStateAction<boolean>>;
+  setValue1: React.Dispatch<React.SetStateAction<boolean>>;
+  Id : string;
 };
 
-export default function PostExpense({setValue} : Props) {
+export default function PutExpenses({setValue1 , Id} : Props) {
 
     const queryClient = useQueryClient()
 
@@ -36,7 +37,7 @@ type Expen = z.infer<typeof schema >
         await new Promise ((resolve) => setTimeout(resolve,2000))
         console.log(response)
         PostExpenses.mutate(response)
-     setValue(false)
+     setValue1(false)
 
     }
 
@@ -46,8 +47,8 @@ type Expen = z.infer<typeof schema >
 const token = localStorage.getItem("token")
     const PostExpenses = useMutation({
 
-        mutationFn : (response : Expen) => fetch("http://localhost:3000/api/expenses" , {
-            method : "POST",
+        mutationFn : (response : Expen) => fetch(`http://localhost:3000/api/expenses/${Id}` , {
+            method : "PUT",
      headers : {
         "Authorization" : `Bearer ${token}`,
         "Content-type" : "application/json"
@@ -72,7 +73,7 @@ queryClient .invalidateQueries({ queryKey: ["expenses"] })
         <div className="flex items-center justify-between">
 
       <h2 className="text-2xl font-bold text-gray-800">Expense Entry</h2>
-        <IoIosClose size={30} onClick={()=> setValue(false)}   />
+        <IoIosClose size={30}  onClick={()=> setValue1(false)}  />
         </div>
 
       <div className="space-y-2  ">

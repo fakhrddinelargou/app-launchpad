@@ -15,27 +15,49 @@ import EmailPassword from "../../pages/pagesProfil/EmailPassword"
 import Notifications from "../../pages/pagesProfil/Notification"
 import Businesses from "../../pages/pagesProfil/Businesses"
 import Integration from "../../pages/pagesProfil/Integration"
+import ProtectedRoute from "../components/ProtectedRoute"
+import GuestOnlyRoute from "../components/GuestOnlyRoute"
+import NotFound from "../components/NotFound"
 
 const router = createBrowserRouter([
       {
-    path : "/",
-    element : <Login/>
+    index : true,
+    element :
+     <GuestOnlyRoute>
+
+       <Login/>
+     </GuestOnlyRoute>
   },
         {
     path : "/login",
-    element : <Login/>
+
+    element :
+    <GuestOnlyRoute>
+      <Login/>
+    </GuestOnlyRoute>
   },
     {
     path : "/register",
-    element : <Register/>
+    element :
+    <GuestOnlyRoute>
+      <Register/>
+    </GuestOnlyRoute>
   },
   {
 path : "/request-password",
-element : <ForgotPassword/>
+element : 
+<GuestOnlyRoute>
+<ForgotPassword/>
+
+</GuestOnlyRoute>
   },
   {
 path : "/reset-password",
-element : <ResetPassword/>
+element :
+<GuestOnlyRoute>
+
+<ResetPassword/>
+</GuestOnlyRoute>
   },
   {
     path:"/",
@@ -43,7 +65,11 @@ element : <ResetPassword/>
  children:[
   {
 path:"dashboard",
-element: <Dashboard/>
+element:
+<ProtectedRoute>
+
+  <Dashboard/>
+</ProtectedRoute>
 
   },
 
@@ -74,6 +100,10 @@ element: <Dashboard/>
         element : <Integration/>
       }
     ]
+  },
+  {
+    path : "*",
+    element:<NotFound/>
   }
 ])
 

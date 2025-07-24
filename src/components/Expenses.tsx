@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CalendarOff, Plus } from "lucide-react";
 import { useState } from "react";
 import PostExpense from "./PostExpense";
+import PutExpenses from "./PutExpenses";
 
 
 
@@ -22,7 +23,10 @@ import PostExpense from "./PostExpense";
 function Expenses(){
 
 const [id , setId] = useState("")
+const [id1, setId1] = useState("")
+
 const [value,setValue] = useState(false)
+const [value1,setValue1] = useState(false)
 const queryClient = useQueryClient()
 // const [put , setPut] = useState("")
     const token = localStorage.getItem('token')
@@ -58,9 +62,11 @@ console.log(data)
     return(
         <div>
             {value && 
-            <PostExpense  setValue={setValue}  />
+            <PostExpense  setValue={setValue}   />
             
             }
+            {value1 &&  <PutExpenses setValue1={setValue1} Id={id1} />}
+        
   {data && <div className='relative flex  justify-center p-2 rounded-[.5rem] shadow-2xs mb-5 bg-gray-50 '>
     <table className=''>
  <Plus onClick={()=> setValue(true)} className="absolute right-3 top-3 " />
@@ -84,7 +90,7 @@ console.log(data)
               <td className="py-2 px-4 text-center uppercase font-medium ">{item.category}</td>
               <td className="py-2 px-4 text-center">{item.date}</td>
 
-                  <td className="py-2 px-10 text-black/50 cursor-pointer"  >
+                  <td className="py-2 px-10 text-black/50 cursor-pointer" onClick={()=> {setValue1(true); setId1(item.id)}}   >
 Edit
         </td>
 
@@ -92,7 +98,7 @@ Edit
                <CalendarOff  strokeWidth={1} size={18} onClick={() => setId(item.id)} className='cursor-pointer' />
 {id === item.id  &&
   <div className='z-10 shadow-2xs p-2 bg-gray-100 rounded-[.4rem]  flex items-center justify-center gap-2 absolute top-9 right-5'>
-  <button className='bg-white shadow-2xl hover:bg-gray-100 p-1 rounded-[.2rem]'>Cancel</button>
+  <button className='bg-white shadow-2xl hover:bg-gray-100 p-1 rounded-[.2rem]' onClick={()=> setId('')}>Cancel</button>
   <button className='bg-red-600 hover:bg-red-700 text-white p-1 rounded-[.2rem]' onClick={()=> deleteItem.mutate()} >Delete</button>
 
 </div>
