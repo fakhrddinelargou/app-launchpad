@@ -1,6 +1,6 @@
 
 import { useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
-import { Bell, CalendarOff } from 'lucide-react';
+import {  CalendarOff } from 'lucide-react';
 import {  useEffect, useState } from 'react';
 import BudgetForm from '../src/components/BudGets';
 
@@ -9,6 +9,7 @@ import {
 } from 'recharts';
 import EditBudgets from '../src/components/EditBudgets';
 import Expenses from '../src/components/Expenses';
+import { TbPointFilled } from 'react-icons/tb';
 
 
 function Dashboard() {
@@ -88,8 +89,11 @@ console.log(getDashboard.data)
 
 console.log(data)
 
+if(!data){
+  return <div className='flex items-center justify-center h-[92vh] text-8xl font-bold text-gray-200 w-full'><span>404</span></div>
+}
 
-  return <div className="w-[87%] h-auto min-h-[92vh]  bg-white px-4">
+  return (   <div className="w-[87%] h-auto mb-3 flex flex-col items-center gap-5    ">
 
 
 
@@ -98,48 +102,52 @@ console.log(data)
 {budget && <BudgetForm  setBudget = {setBudget} />}
 
 
-<h1 className="font-bold text-3xl p-5 text-blue-950  border-b-1 border-gray-200 mb-4 ">Dashboard</h1>
+<h1 className="font-bold text-3xl p-5 text-blue-950  border-b-1 border-gray-200 mr-auto mx-2 w-full  ">Dashboard</h1>
 
-<div className=' w-full h-auto'>
-<div className=' border-b-1 border-gray-200 mb-2 font-medium flex items-center p-1 justify-between text-[.8rem]'>
+<div className=' w-full h-auto flex flex-col  gap-8 items-center '>
+  <div className='table1 flex flex-col items-center gap-5 bg-white rounded-xl w-full  max-w-[95%] pt-5 pb-1 px-1  '>
+<div className='  font-medium flex items-center w-full justify-between text-[.8rem] px-5'>
   <span className='text-gray-600'>Recent Activity</span>
-  <div onClick={()=> setBudget(true)} className='bg-blue-600 p-2 hover:bg-blue-700 cursor-pointer text-white rounded-[.2rem]'>+ Create New Budgets</div>
+  <div onClick={()=> setBudget(true)} className='bg-blue-600 p-2 px-3 hover:bg-blue-700 cursor-pointer text-white rounded-4xl'>+ Create New Budgets</div>
 </div>
 
-<div>
-  {data && <div className=' flex  justify-center p-2 rounded-[.5rem] shadow-2xs mb-5 bg-gray-50 '>
-    <table className=''>
+<div className=' w-full'>
+  {data && <div className=' flex  justify-center  rounded-[.5rem]   w-full  '>
+    <table className='w-full '>
 
  
-         <thead className=" w-full border-b-1 border-gray-200">
-        <tr className='text-gray-600 font-medium'>
-          <th className="py-3 px-10 ">DATE</th>
-          <th className="py-3 pl-3 pr-20">TYPE</th>
-          <th className="py-3 pl-3 pr-25 ">CATEGORY</th>
-          <th className="py-3 px-10">AMOUNT</th>
-          <th className="py-3 px-4">SPENT</th>
+         <thead className=" w-full  rounded-2xl  ">
+        <tr className='text-gray-500 font-medium bg-indigo-50  text-[.8rem] '>
+          <th className="py-3 px-10 rounded-l-[.3rem] ">Date</th>
+          <th className="py-3 pl-3 pr-20">Type</th>
+          <th className="py-3  pr-25 ">Catygory</th>
+          <th className="py-3 px-10">Amount</th>
+          <th className="py-3 px-4">Spent</th>
+          <th className="py-3 px-10"></th>
+          <th className="py-3 px-4 rounded-r-[.3rem]"></th>
         </tr>
+      
       </thead>
 <tbody >
-    
+  
    {data && data.map((item) => (
-     <tr key={item.id} className="  py-5  hover:bg-gray-200 ">
-              <td className="py-2 px-4 text-center ">{item.month}</td>
-              <td className="py-2 px-4"><span className='bg-green-600 text-[.8rem] p-1 rounded-[.2rem] text-white'>Revenue</span></td>
-              <td className="py-2 px-4 font-medium uppercase ">{item.category}</td>
-              <td className="py-2 px-4 text-center font-bold"><span className='text-[.8rem] font-medium'>$</span>{item.amount}</td>
-              <td className="py-2 px-4 text-center">{item.spent}</td>
+     <tr key={item.id} className="  h-[3rem]  hover:bg-gray-200 text-[.9rem] ">
+              <td className="py-2 px-4 text-center font-medium rounded-l-[.3rem]">{item.month}</td>
+              <td className="py-2 px-4  "><span className='bg-green-100 w-22 font-medium   flex items-center justify-center  text-[.8rem]     rounded-[2rem] text-green-600'><TbPointFilled size={18}  />Revenue</span></td>
+              <td className="py-2 px-4 pl-7 font-semibold text-blue-950   uppercase text-[.8rem]  ">{item.category}</td>
+              <td className="py-2 px-4 text-center font-semibold">{item.amount} $</td>
+              <td className="py-2 px-4 text-center ">{item.spent}</td>
 
                   <td className="py-2 px-10 text-black/50 cursor-pointer" onClick={() => {setPut(item.id); setEdit(true)}} >
 Edit
         </td>
 
-              <td className="py-2 px-6 relative">
+              <td className="py-2 px-6 relative rounded-r-[.3rem]">
                <CalendarOff  strokeWidth={1} size={18} onClick={() => setId(item.id)} className='cursor-pointer' />
 {id === item.id  &&
   <div className='z-10 shadow-2xs p-2 bg-gray-100 rounded-[.4rem]  flex items-center justify-center gap-2 absolute top-9 right-5'>
-  <button className='bg-white shadow-2xl hover:bg-gray-100 p-1 rounded-[.2rem]' onClick={() => setId("")}>Cancel</button>
-  <button className='bg-red-600 hover:bg-red-700 text-white p-1 rounded-[.2rem]'  onClick={() => {setId(item.id); deleteItem.mutate();}}>Delete</button>
+  <button className='bg-white shadow-2xs hover:bg-gray-50 p-1 font-medium w-20 rounded-[.2rem]' onClick={() => setId("")}>Cancel</button>
+  <button className='bg-red-600 hover:bg-red-700 text-white p-1 font-medium w-20 rounded-[.2rem]'  onClick={() => {setId(item.id); deleteItem.mutate();}}>Delete</button>
 
 </div>
 }
@@ -152,13 +160,14 @@ Edit
 </tbody>
    </table>
   </div>}
+  </div>
 </div>
 
-<Expenses/>
+<Expenses />
 
 </div>
 
-<div className="flex gap-5 px-3 ">
+<div className="flex gap-5 px-3 bg-white w-full max-w-[95%] rounded-[.3rem] ">
 
 <ResponsiveContainer width="100%" height={250}>
   <AreaChart
@@ -215,18 +224,18 @@ Edit
   </AreaChart>
 </ResponsiveContainer>
 
-  <div className="w-[40%] h-[45vh] bg-gray-100 rounded-[.5rem] overflow-hidden ">
+  {/* <div className="w-[40%] h-[45vh] bg-gray-100 rounded-[.5rem] overflow-hidden ">
   <span className="text-gray-500 text-[.8rem] flex gap-1 p-2 bg-gray-300 ">
   <Bell color="gray" size={18} />  Notification Panel
   </span>
   <div className="w-full h-full p-2">
 
   </div>
-  </div>
+  </div> */}
 </div>
 
 
-  </div>;
+  </div> )
 }
 
 export default Dashboard;

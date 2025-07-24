@@ -40,7 +40,7 @@ navigate("/register")
     },2000)
   }else{
 
-    navigate("/dashboard")
+    navigate("/analytics/dashboard")
   }
     return data;
   };

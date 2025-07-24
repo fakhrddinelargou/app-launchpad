@@ -64,10 +64,9 @@ element :
  element : <Layout/>,
  children:[
   {
-path:"dashboard",
+path:"analytics/dashboard",
 element:
 <ProtectedRoute>
-
   <Dashboard/>
 </ProtectedRoute>
 

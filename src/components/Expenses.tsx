@@ -60,34 +60,42 @@ queryClient.invalidateQueries({queryKey:["expenses"]})
 console.log(data)
 
     return(
-        <div>
+        <div className=" w-full max-w-[95%]">
             {value && 
             <PostExpense  setValue={setValue}   />
             
             }
             {value1 &&  <PutExpenses setValue1={setValue1} Id={id1} />}
         
-  {data && <div className='relative flex  justify-center p-2 rounded-[.5rem] shadow-2xs mb-5 bg-gray-50 '>
-    <table className=''>
- <Plus onClick={()=> setValue(true)} className="absolute right-3 top-3 " />
+  {data && <div className='relative flex  justify-center  rounded-[.3rem] shadow-2xs  bg-white '>
+    <table className='w-full'>
+      <span 
+  title="Create New Expenses"
  
-         <thead className=" w-full border-b-1 border-gray-200">
-        <tr className='text-gray-600 font-medium'>
-          <th className="py-3  text-start ">Description</th>
+>
+  
+ <Plus onClick={()=> setValue(true)} className="absolute right-1 top-1 text-gray-500 "  size={18} />
+</span>
+ 
+         <thead className=" w-full border-b-1 border-gray-200 ">
+        <tr className='text-gray-600 font-medium text-[.8rem] '>
+          <th className="py-3  text-start pl-3">Description</th>
           <th className="py-3  px-10">Amount ($)</th>
           <th className="py-3 px-10 ">Category</th>
           <th className="py-3 px-10">Date</th>
           <th className="py-3 px-4">Actions</th>
+          <th className="py-3 px-4"></th>
+
         </tr>
       </thead>
 <tbody >
     
    {data && data.map((item) => (
-     <tr key={item.id} className="  py-5  hover:bg-gray-200 ">
-              <td className="py-2 text-start  ">{item.description}</td>
+     <tr key={item.id} className="  py-5  hover:bg-gray-200 text-[.8rem] ">
+              <td className="py-2 pl-3 text-start font-medium ">{item.description}</td>
               {/* <td className="py-2 px-4"><span className='bg-green-600 text-[.8rem] p-1 rounded-[.2rem] text-white'>Revenue</span></td> */}
-              <td className="py-2 px-4 text-center  font-bold "><span className='text-[.8rem] font-medium'>$</span>{item.amount}</td>
-              <td className="py-2 px-4 text-center uppercase font-medium ">{item.category}</td>
+              <td className="py-2 px-4 text-center  font-semibold "><span className='text-[.8rem] font-medium'>$</span>{item.amount}</td>
+              <td className="py-2 px-4 text-center uppercase font-medium   ">{item.category}</td>
               <td className="py-2 px-4 text-center">{item.date}</td>
 
                   <td className="py-2 px-10 text-black/50 cursor-pointer" onClick={()=> {setValue1(true); setId1(item.id)}}   >

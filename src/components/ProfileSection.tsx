@@ -46,7 +46,7 @@ const menuItems: FeildData[] = [
 
                 </ul>
             </nav>
-            <Link to={"/dashboard"} className="mt-auto mb-4">
+            <Link to={"/analytics/dashboard"} className="mt-auto mb-4">
               <ArrowLeftFromLine size={20}  />
             </Link>
         </div>
