@@ -28,12 +28,12 @@ const schema = z.object({
     .string()
     .regex(/^\d{4}-\d{2}$/, { message: "Month must be in YYYY-MM format" }),
 
-  spent: z
-    .string()
-    .min(1, "Amount is required")
-    .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-      message: "Spent must be a non-negative number",
-    }),
+spent: z
+  .string()
+  .min(1, "Spent is required")
+  .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+    message: "Spent must be greater than 0",
+  }),
 });
 
 type Budget = z.infer<typeof schema >

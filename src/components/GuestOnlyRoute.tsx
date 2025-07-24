@@ -12,7 +12,7 @@ export default function GuestOnlyRoute({children} : Props) {
     const token = localStorage.getItem('token')
 
     if(token){
-        return <Navigate to="/dashboard"/>
+        return <Navigate to="/analytics/dashboard"/>
     }
     return children
 

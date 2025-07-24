@@ -27,13 +27,13 @@ const menuItems: FeildData[] = [
         <div className="  w-[13%] h-auto min-h-[92vh] bg-[#fff]">
 
 
-<nav className="w-full  px-5 pt-5">
+<nav className="w-full  px-2 pt-5">
     <ul className='flex flex-col  gap-5'>
         {menuItems.map((item , index )=>  {
             return ( 
-<li>
+<li className=' '>
     <NavLink    key={index} to={"analytics/dashboard"}   className={({ isActive }) =>
-    ` p-2 text-[.8rem] rounded-[.3rem]  flex items-center gap-2 font-medium hover:bg-gray-100
+    ` p-2 text-[.8rem] rounded-[.3rem]   flex items-center gap-2 font-medium hover:bg-gray-100
      ${isActive ? "bg-gray-200" : " "}`
   }>
 {item.icon}{item.name}
