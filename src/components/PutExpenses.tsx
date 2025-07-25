@@ -4,15 +4,19 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { IoIosClose } from "react-icons/io";
 import z from "zod";
+import type { Expense } from "./typeExpenses";
 
 
 type Props = {
-  setValue1: React.Dispatch<React.SetStateAction<boolean>>;
-  Id : string;
+  data: Expense;
+  value : any;
 };
 
-export default function PutExpenses({setValue1 , Id} : Props) {
 
+
+export default function PutExpenses({data , value} : Props) {
+console.log(data.date)
+const formattedDate = data.date ? data.date.slice(0, 7) : "";
     const queryClient = useQueryClient()
 
 const schema = z.object({
@@ -30,14 +34,20 @@ const schema = z.object({
 type Expen = z.infer<typeof schema >
 
     const {register , handleSubmit , formState : { isSubmitting , errors}} = useForm<Expen>({
-        resolver : zodResolver(schema)
+        resolver : zodResolver(schema),
+        defaultValues :{
+          description:data.description,
+          amount : data.amount,
+          category: data.category,
+         date :formattedDate,
+        }
     })
 
     const onSubmit : SubmitHandler<Expen> = async (response) => {
         await new Promise ((resolve) => setTimeout(resolve,2000))
         console.log(response)
         PostExpenses.mutate(response)
-     setValue1(false)
+     value(false)
 
     }
 
@@ -47,7 +57,7 @@ type Expen = z.infer<typeof schema >
 const token = localStorage.getItem("token")
     const PostExpenses = useMutation({
 
-        mutationFn : (response : Expen) => fetch(`http://localhost:3000/api/expenses/${Id}` , {
+        mutationFn : (response : Expen) => fetch(`http://localhost:3000/api/expenses/${data.id}` , {
             method : "PUT",
      headers : {
         "Authorization" : `Bearer ${token}`,
@@ -73,7 +83,7 @@ queryClient .invalidateQueries({ queryKey: ["expenses"] })
         <div className="flex items-center justify-between">
 
       <h2 className="text-2xl font-bold text-gray-800">Expense Entry</h2>
-        <IoIosClose size={30}  onClick={()=> setValue1(false)}  />
+        <IoIosClose size={30}  onClick={()=> value(false)}  />
         </div>
 
       <div className="space-y-2  ">

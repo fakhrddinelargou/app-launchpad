@@ -3,18 +3,25 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { IoIosClose } from "react-icons/io";
-
 import z from "zod";
+//   type Budget = {
+//   id: string;
+//   userId: string;
+//   category: string;
+//   amount: number;
+//   month: string; 
+//   spent: number;
+//   createdAt: string; 
+//   updatedAt: string; 
+//   setEdit : React.Dispatch<React.SetStateAction<boolean>>;
+// };
 
-type Props = {
-    getId : string
-    setEdit : React.Dispatch<React.SetStateAction<boolean>>;
-}
 
- function EditBudgets({getId , setEdit} : Props) {
+
+ function EditBudgets({getData , setEdit} : any) {
 
     const queryClient = useQueryClient()
-console.log(getId)
+console.log({data :getData})
 
 
 
@@ -22,7 +29,7 @@ console.log(getId)
 
 const token = localStorage.getItem('token')
 const editData = useMutation({
-    mutationFn: (response : Budget) => fetch(`http://localhost:3000/api/budgets/${getId}` , {
+    mutationFn: (response : Budget) => fetch(`http://localhost:3000/api/budgets/${getData.id}` , {
         method : "PUT",
         headers:{
             "Authorization" : `Bearer ${token}`,
@@ -67,8 +74,13 @@ const schema = z.object({
 type Budget = z.infer<typeof schema >
 
     const {register , handleSubmit , formState : { isSubmitting , errors}} = useForm<Budget>({
-        resolver : zodResolver(schema)
-
+        resolver : zodResolver(schema),
+ defaultValues:{
+   category: getData.category,
+    amount: String(getData.amount),  
+    month: getData.month,
+    spent: String(getData.spent),
+ }
     })
 
     const onSubmit : SubmitHandler<Budget> = async (response) => {

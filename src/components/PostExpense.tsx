@@ -7,10 +7,10 @@ import z from "zod";
 
 
 type Props = {
-  setValue: React.Dispatch<React.SetStateAction<boolean>>;
+  value: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function PostExpense({setValue} : Props) {
+export default function PostExpense({value} : Props) {
 
     const queryClient = useQueryClient()
 
@@ -36,7 +36,7 @@ type Expen = z.infer<typeof schema >
         await new Promise ((resolve) => setTimeout(resolve,2000))
         console.log(response)
         PostExpenses.mutate(response)
-     setValue(false)
+     value(false)
 
     }
 
@@ -72,7 +72,7 @@ queryClient .invalidateQueries({ queryKey: ["expenses"] })
         <div className="flex items-center justify-between">
 
       <h2 className="text-2xl font-bold text-gray-800">Expense Entry</h2>
-        <IoIosClose size={30} onClick={()=> setValue(false)}   />
+        <IoIosClose size={30} onClick={()=> value(false)}   />
         </div>
 
       <div className="space-y-2  ">

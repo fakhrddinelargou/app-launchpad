@@ -6,75 +6,10 @@ import BudgetForm from '../src/components/BudGets';
 
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
-} from 'recharts';
-import EditBudgets from '../src/components/EditBudgets';
+} from 'recharts';  
 import Expenses from '../src/components/Expenses';
 import { TbPointFilled } from 'react-icons/tb';
-
-
-function Dashboard() {
-
-
-const queryClient = useQueryClient()
-const [budget , setBudget] = useState(false)
-const [edit , setEdit] = useState(false)
-
-const [id , setId] = useState("")
-const [put , setPut] = useState("")
-
-console.log(put)
-// const [delet , setDelet] = useState(false)
-
-
-console.log(id )
-
-const token = localStorage.getItem('token')
-const {data} = useQuery<Budget[]>({
-
-queryKey : ["budgets"],
-  queryFn : () => fetch ("http://localhost:3000/api/budgets" , {
-method : "GET",
-headers : {
-  "Content-type" : "application/json",
-  "Authorization" : `Bearer ${token}`
-}
-  }).then((res) => res.json())
-
-})
-
-const deleteItem = useMutation({
-  mutationFn : ()=> fetch(`http://localhost:3000/api/budgets/${id}` , {
-    method : "DELETE" ,
-    headers:{
-      "Authorization" : `Bearer ${token}`,
-      "Content-type" : "application/json"
-    }
-  }).then((res) => res.json()),
-  onSuccess : ()=>{
-queryClient.invalidateQueries({queryKey:["budgets"]})
-  }
-})
-
-
-
-const getDashboard = useMutation({
-  mutationFn : () => fetch("http://localhost:3000/api/analytics/dashboard" ,{
-    method : "GET",
-    headers : {
-      "Authorization" : `Bearer ${token}`,
-      "Content-type" : "application/json"
-    }
-  }).then((res) => res.json()),
-
-})
-
-useEffect(()=>{
-  getDashboard.mutateAsync()
-},[])
-
-
-
-console.log(getDashboard.data)
+import EditBudgets from '../src/components/EditBudgets';
 
   type Budget = {
   id: string;
@@ -87,7 +22,73 @@ console.log(getDashboard.data)
   updatedAt: string; 
 };
 
-console.log(data)
+
+
+function Dashboard() {
+
+
+const queryClient = useQueryClient()  
+const [budget , setBudget] = useState(false)
+const [edit , setEdit] = useState(false)
+
+const [id , setId] = useState("")
+const [put , setPut] = useState<Budget | null>(null);
+
+
+
+
+// const [delet , setDelet] = useState(false)
+
+
+
+const token = localStorage.getItem('token')
+const {data} = useQuery<Budget[]>({
+
+queryKey : ["budgets"],  
+  queryFn : () => fetch ("http://localhost:3000/api/budgets" , {
+method : "GET",    
+headers : {
+  "Content-type" : "application/json",
+  "Authorization" : `Bearer ${token}`
+}  
+  }).then((res) => res.json())
+
+})  
+
+const deleteItem = useMutation({
+  mutationFn : ()=> fetch(`http://localhost:3000/api/budgets/${id}` , {
+    method : "DELETE" ,
+    headers:{
+      "Authorization" : `Bearer ${token}`,
+      "Content-type" : "application/json"
+    }  
+  }).then((res) => res.json()),  
+  onSuccess : ()=>{
+queryClient.invalidateQueries({queryKey:["budgets"]})    
+  }
+})  
+
+
+
+const getDashboard = useMutation({
+  mutationFn : () => fetch("http://localhost:3000/api/analytics/dashboard" ,{
+    method : "GET",
+    headers : {
+      "Authorization" : `Bearer ${token}`,
+      "Content-type" : "application/json"
+    }  
+  }).then((res) => res.json()),  
+
+})  
+
+useEffect(()=>{
+  getDashboard.mutateAsync()
+},[])  
+
+
+
+
+
 
 if(!data){
   return <div className='flex items-center justify-center h-[92vh] text-8xl font-bold text-gray-200 w-full'><span>404</span></div>
@@ -97,7 +98,7 @@ if(!data){
 
 
 
- {edit && < EditBudgets getId={put} setEdit={setEdit} /> }
+ {edit && < EditBudgets getData={put} setEdit={setEdit} /> }
 
 {budget && <BudgetForm  setBudget = {setBudget} />}
 
@@ -107,7 +108,7 @@ if(!data){
 <div className=' w-full h-auto flex flex-col  gap-8 items-center '>
   <div className='table1 flex flex-col items-center gap-5 bg-white rounded-xl w-full  max-w-[95%] pt-5 pb-1 px-1  '>
 <div className='  font-medium flex items-center w-full justify-between text-[.8rem] px-5'>
-  <span className='text-gray-600'>Recent Activity</span>
+  <span className='text-gray-600'>Budgets :</span>
   <div onClick={()=> setBudget(true)} className='bg-blue-600 p-2 px-3 hover:bg-blue-700 cursor-pointer text-white rounded-4xl'>+ Create New Budgets</div>
 </div>
 
@@ -130,7 +131,7 @@ if(!data){
       </thead>
 <tbody >
   
-   {data && data.map((item) => (
+   {data && data.map((item , index : number) => (
      <tr key={item.id} className="  h-[3rem]  hover:bg-gray-200 text-[.9rem] ">
               <td className="py-2 px-4 text-center font-medium rounded-l-[.3rem]">{item.month}</td>
               <td className="py-2 px-4  "><span className='bg-green-100 w-22 font-medium   flex items-center justify-center  text-[.8rem]     rounded-[2rem] text-green-600'><TbPointFilled size={18}  />Revenue</span></td>
@@ -138,7 +139,7 @@ if(!data){
               <td className="py-2 px-4 text-center font-semibold">{item.amount} $</td>
               <td className="py-2 px-4 text-center ">{item.spent}</td>
 
-                  <td className="py-2 px-10 text-black/50 cursor-pointer" onClick={() => {setPut(item.id); setEdit(true)}} >
+                  <td className="py-2 px-10 text-black/50 cursor-pointer" onClick={() => {setPut(data[index]); setEdit(true)}} >
 Edit
         </td>
 
@@ -162,6 +163,7 @@ Edit
   </div>}
   </div>
 </div>
+
 
 <Expenses />
 

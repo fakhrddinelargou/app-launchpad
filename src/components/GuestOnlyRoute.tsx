@@ -1,3 +1,4 @@
+
 import type { ReactNode } from "react"
 import { Navigate } from "react-router-dom"
 
@@ -7,7 +8,6 @@ type Props = {
 } 
 
 export default function GuestOnlyRoute({children} : Props) {
-
 
     const token = localStorage.getItem('token')
 
