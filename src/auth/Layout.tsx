@@ -8,11 +8,14 @@ import { Outlet } from "react-router-dom";
 
 function Layout() {
   return (
-    <div>
+    <div className="w-full ">
       <Header />
       <div className="flex">
         <Sections />
-        <Outlet />
+        <div>
+
+        <Outlet  />
+        </div>
       </div>
     </div>
   );

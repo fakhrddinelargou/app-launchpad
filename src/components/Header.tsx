@@ -12,7 +12,7 @@ function  Header(){
         navigate("/ProfileInfo")
     }
     return(
-         <div className="bg-white border-b-1 border-gray-200 w-screen h-[8vh] flex items-center pr-5 justify-between">
+         <div className="bg-white border-b-1 border-gray-200 w-full h-[8vh] flex items-center pr-5 justify-between">
     <div className='overflow-hidden w-55 h-10 flex items-center'>
         <img src="/logo.png" className="w-50 pl-5 " />
       

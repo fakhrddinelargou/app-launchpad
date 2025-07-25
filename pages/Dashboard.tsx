@@ -1,7 +1,7 @@
 
 import { useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {  CalendarOff } from 'lucide-react';
-import {  useEffect, useState } from 'react';
+import {   useState } from 'react';
 import BudgetForm from '../src/components/BudGets';
 
 import {
@@ -70,20 +70,20 @@ queryClient.invalidateQueries({queryKey:["budgets"]})
 
 
 
-const getDashboard = useMutation({
-  mutationFn : () => fetch("http://localhost:3000/api/analytics/dashboard" ,{
-    method : "GET",
-    headers : {
-      "Authorization" : `Bearer ${token}`,
-      "Content-type" : "application/json"
-    }  
-  }).then((res) => res.json()),  
+// const getDashboard = useMutation({
+//   mutationFn : () => fetch("http://localhost:3000/api/analytics/dashboard" ,{
+//     method : "GET",
+//     headers : {
+//       "Authorization" : `Bearer ${token}`,
+//       "Content-type" : "application/json"
+//     }  
+//   }).then((res) => res.json()),  
 
-})  
+// })  
 
-useEffect(()=>{
-  getDashboard.mutateAsync()
-},[])  
+// useEffect(()=>{
+//   getDashboard.mutateAsync()
+// },[])  
 
 
 
@@ -94,7 +94,7 @@ if(!data){
   return <div className='flex items-center justify-center h-[92vh] text-8xl font-bold text-gray-200 w-full'><span>404</span></div>
 }
 
-  return (   <div className="w-[87%] h-auto mb-3 flex flex-col items-center gap-5    ">
+  return (   <div className="w-full h-auto mb-3 flex flex-col items-center gap-5    ">
 
 
 
