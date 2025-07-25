@@ -31,8 +31,8 @@ const menuItems: FeildData[] = [
     <ul className='flex flex-col  gap-5'>
         {menuItems.map((item , index )=>  {
             return ( 
-<li className=' '>
-    <NavLink    key={index} to={"analytics/dashboard"}   className={({ isActive }) =>
+<li  key={index}>
+    <NavLink    to={"analytics/dashboard"}   className={({ isActive }) =>
     ` p-2 text-[.8rem] rounded-[.3rem]   flex items-center gap-2 font-medium hover:bg-gray-100
      ${isActive ? "bg-gray-200" : " "}`
   }>

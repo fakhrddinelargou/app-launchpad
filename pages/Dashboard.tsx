@@ -56,7 +56,7 @@ headers : {
 })  
 
 const deleteItem = useMutation({
-  mutationFn : ()=> fetch(`http://localhost:3000/api/budgets/${id}` , {
+  mutationFn : (id : string)=> fetch(`http://localhost:3000/api/budgets/${id}` , {
     method : "DELETE" ,
     headers:{
       "Authorization" : `Bearer ${token}`,
@@ -148,7 +148,7 @@ Edit
 {id === item.id  &&
   <div className='z-10 shadow-2xs p-2 bg-gray-100 rounded-[.4rem]  flex items-center justify-center gap-2 absolute top-9 right-5'>
   <button className='bg-white shadow-2xs hover:bg-gray-50 p-1 font-medium w-20 rounded-[.2rem]' onClick={() => setId("")}>Cancel</button>
-  <button className='bg-red-600 hover:bg-red-700 text-white p-1 font-medium w-20 rounded-[.2rem]'  onClick={() => {setId(item.id); deleteItem.mutate();}}>Delete</button>
+  <button className='bg-red-600 hover:bg-red-700 text-white p-1 font-medium w-20 rounded-[.2rem]'  onClick={() => { deleteItem.mutate(item.id);}}>Delete</button>
 
 </div>
 }

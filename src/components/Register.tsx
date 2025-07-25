@@ -38,14 +38,14 @@ const handleLogin = () =>{
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
    const response = await creatNewLogin.mutateAsync(data);
-   console.log(data)
+
 
   if (response.error) {
 setError(true)
 
 setTimeout(()=>{
   setError(false)
-  console.log(response.error)
+  
 },2000)
   
   }else{

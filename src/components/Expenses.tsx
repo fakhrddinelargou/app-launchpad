@@ -21,7 +21,7 @@ const [id1, setId1] = useState("")
 const [value,setValue] = useState(false)
 const [valueP,setValueP] = useState(false)
 
-console.log(valueP)
+
 
 // const [value1,setValue1] = useState(false)
 const queryClient = useQueryClient()
@@ -54,7 +54,6 @@ queryClient.invalidateQueries({queryKey:["expenses"]})
 })
 
 
-console.log(dataa)
 
     return(
       <div className='table1 flex flex-col items-center gap-5 bg-white rounded-xl w-full  max-w-[95%] pt-5 pb-1 px-1  '>
@@ -63,7 +62,7 @@ console.log(dataa)
 
 <div className='  font-medium flex items-center w-full justify-between text-[.8rem] px-5'>
   <span className='text-gray-600'>Expenses :</span>
-  <div  className='bg-blue-600 p-2 px-3 hover:bg-blue-700 cursor-pointer text-white rounded-4xl' onClick={()=> setValue(true)}>+ Create New Budgets</div>
+  <div  className='bg-blue-600 p-2 px-3 hover:bg-blue-700 cursor-pointer text-white rounded-4xl' onClick={()=> setValue(true)}>+ Create New Expenses</div>
 </div>
 
 <div className=' w-full'>

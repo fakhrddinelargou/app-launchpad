@@ -21,7 +21,7 @@ import z from "zod";
  function EditBudgets({getData , setEdit} : any) {
 
     const queryClient = useQueryClient()
-console.log({data :getData})
+
 
 
 
@@ -43,7 +43,8 @@ const editData = useMutation({
     }
 })
 
-console.log(editData)
+
+
 
 
 
@@ -85,7 +86,7 @@ type Budget = z.infer<typeof schema >
 
     const onSubmit : SubmitHandler<Budget> = async (response) => {
         await new Promise ((resolve) => setTimeout(resolve,2000))
-        console.log(response)
+      
         editData.mutate(response)
       setEdit(false)
 

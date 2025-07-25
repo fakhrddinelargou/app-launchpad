@@ -44,7 +44,7 @@ type Budget = z.infer<typeof schema >
 
     const onSubmit : SubmitHandler<Budget> = async (response) => {
         await new Promise ((resolve) => setTimeout(resolve,2000))
-        console.log(response)
+       
         postBudger.mutate(response)
         setBudget(false)
 

@@ -40,7 +40,7 @@ body : JSON.stringify(data),
 }).then((res) => res.json()),
 
 onSuccess : (response) =>{
-    console.log("Response from server:", response);
+
     if(response.message){
         navigate("/login")
     }
@@ -61,7 +61,7 @@ const {register , handleSubmit , formState : {errors}} = useForm<FieldData>()
 const onSubmit : SubmitHandler<FieldData> = async (data) => {
      try {
     const response = await validePassword.mutateAsync(data);
-    console.log("Server response:", response);
+   
     if (response.message) {
       navigate("/reset-password");
     }

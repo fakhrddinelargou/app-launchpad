@@ -34,7 +34,9 @@ export default function ProtectedRoute({ children }: Props) {
   }
 
   if (isLoading) {
-    return <div>isLoading</div>;
+    return <div className="w-full h-[92vh] flex items-center justify-center ">
+      <p className="text-4xl">...Loading</p>
+    </div>;
   }
 
   return children;

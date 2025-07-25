@@ -33,7 +33,7 @@ navigate("/register")
     await new Promise((resolve) => setTimeout(resolve, 1000));
   const response =  await  creatNewLogin.mutateAsync(data);
   if(response.error){
-    console.log(response.error)
+    
     setError(true)
     setTimeout(()=>{
       setError(false)

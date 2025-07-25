@@ -51,7 +51,7 @@ const token = localStorage.getItem('token')
             putData.mutate(response)
         }
 
-    console.log(data)
+    
 
 
     return (

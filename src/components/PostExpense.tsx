@@ -34,7 +34,7 @@ type Expen = z.infer<typeof schema >
 
     const onSubmit : SubmitHandler<Expen> = async (response) => {
         await new Promise ((resolve) => setTimeout(resolve,2000))
-        console.log(response)
+       
         PostExpenses.mutate(response)
      value(false)
 

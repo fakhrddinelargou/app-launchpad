@@ -49,7 +49,7 @@ type Notification = {
         }).then((res) => res.json()),
     })
 
-console.log(data)
+
 
     return (
         <div className="w-[80%] h-full  px-10">

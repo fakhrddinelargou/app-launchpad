@@ -43,8 +43,9 @@ const password = watch("password")
 
 }).then((res) => res.json()),
 
-onSuccess : (response) =>{
- console.log("Response from server:", response);
+onSuccess : () =>{
+ 
+  
 
     navigate("/login");
   
@@ -54,7 +55,7 @@ onSuccess : (response) =>{
 
     const onSubmit : SubmitHandler<FieldData> = async (data) =>{
         try{
-            console.log(data)
+        
             const response = await CreatNewPassWord.mutateAsync(data)
             return response
 

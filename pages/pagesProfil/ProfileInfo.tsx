@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+
 import { useForm, type SubmitHandler } from "react-hook-form";
+import LogOut from "../../src/components/LogOut";
 
 
 type FieldValues = {
@@ -51,11 +53,11 @@ function ProfileInfo(){
 
     })
 
-    console.log(data)
+
 
     const onSubmit : SubmitHandler<FieldValues> = async (response) => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
-        console.log(response)
+      
         putProfile.mutate(response)
     }
 
@@ -104,6 +106,7 @@ function ProfileInfo(){
 
             <button type="submit" className="text-[.9rem] font-medium text-green-700 pr-5 absolute right-7 top-6 ">{isSubmitting ? "...saving change" : "save"}</button>
         </form>
+        <LogOut />
        </div>
     )
 }
