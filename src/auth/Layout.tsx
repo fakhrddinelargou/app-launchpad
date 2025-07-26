@@ -10,11 +10,11 @@ function Layout() {
   return (
     <div className="w-full ">
       <Header />
-      <div className="flex">
+      <div className="flex  w-[99%] ">
         <Sections />
-        <div>
 
         <Outlet  />
+        <div>
         </div>
       </div>
     </div>

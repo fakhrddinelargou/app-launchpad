@@ -68,7 +68,7 @@ function ProfileInfo(){
         
         
         <div className="border-y-1 border-gray-200 h-[25vh] flex items-center">
-            <img className="w-30 rounded-full" src="./profile.png" alt="avatar" />
+            <img className="w-30 rounded-full" src="../profile.png" alt="avatar" />
 
         </div>
         <form className="py-5 flex flex-col gap-5"  onSubmit={handleSubmit(onSubmit)}>

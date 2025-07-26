@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
+import Dashboard from "../../pages/Dashboard";
 
 type Props = {
   children: ReactNode;
@@ -9,7 +10,7 @@ type Props = {
 export default function ProtectedRoute({ children }: Props) {
   const token = localStorage.getItem("token");
 
-  const { isLoading, error } = useQuery({
+  const { isLoading, error , data } = useQuery({
     queryKey: ["dashboard"],
     queryFn: async () => {
       const res = await fetch("http://localhost:3000/api/analytics/dashboard", {
@@ -38,6 +39,8 @@ export default function ProtectedRoute({ children }: Props) {
       <p className="text-4xl">...Loading</p>
     </div>;
   }
+
+  return <Dashboard dataDashboard={data}/>
 
   return children;
 }
