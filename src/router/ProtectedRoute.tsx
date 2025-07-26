@@ -11,7 +11,7 @@ type Props = {
 export default function ProtectedRoute({ children }: Props) {
   const token = localStorage.getItem("token");
 
-  const {data , isLoading, error  } = useQuery({
+  const {data ,  error  } = useQuery({
     queryKey: ["dashboard"],
     queryFn: async () => {
       const res = await fetch("http://localhost:3000/api/analytics/dashboard", {
