@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import Dashboard from "../../pages/Dashboard";
+import Dashboard from "../pages/Dashboard";
+
 
 type Props = {
   children: ReactNode;
@@ -10,7 +11,7 @@ type Props = {
 export default function ProtectedRoute({ children }: Props) {
   const token = localStorage.getItem("token");
 
-  const { isLoading, error , data } = useQuery({
+  const {data , isLoading, error  } = useQuery({
     queryKey: ["dashboard"],
     queryFn: async () => {
       const res = await fetch("http://localhost:3000/api/analytics/dashboard", {
@@ -29,18 +30,17 @@ export default function ProtectedRoute({ children }: Props) {
     },
   });
 
-  if ((error as any)?.status === 403 || (error as any)?.status === 401) {
-    localStorage.removeItem("token");
-    return <Navigate to={"/login"} />;
-  }
+ if ((error as any)?.status === 403 || (error as any)?.status === 401) {
+  localStorage.removeItem("token");
+  return <Navigate to="/login" />;
+}
 
-  if (isLoading) {
-    return <div className="w-full h-[92vh] flex items-center justify-center ">
-      <p className="text-4xl">...Loading</p>
-    </div>;
-  }
 
-  return <Dashboard dataDashboard={data}/>
+if (data) {
+  return <Dashboard  />;
+}
 
-  return children;
+
+return <>{children}</>;
+
 }

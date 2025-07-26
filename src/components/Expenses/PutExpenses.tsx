@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { IoIosClose } from "react-icons/io";
 import z from "zod";
-import type { Expense } from "./typeExpenses";
+import type { Expense } from "../../types/typeExpenses";
 
 
 type Props = {

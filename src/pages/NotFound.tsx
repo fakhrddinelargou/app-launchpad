@@ -1,23 +1,23 @@
-import {  useNavigate, useRouteError } from "react-router-dom";
+import { useNavigate, useRouteError } from "react-router-dom";
 
 export default function NotFound() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
-const navigate = useNavigate()
-  const token = localStorage.getItem('token')
-
-  const handleHome = ()=>{
-
-    if(token){
-    return  navigate('/analytics/dashboard')
+  const handleHome = () => {
+    if (token) {
+      return navigate("/analytics/dashboard");
     }
-    return  navigate('/login')
-  }
+    return navigate("/login");
+  };
 
   const error = useRouteError();
 
   console.error(error);
 
-  function isErrorWithMessage(error: unknown): error is { statusText?: string; message?: string } {
+  function isErrorWithMessage(
+    error: unknown
+  ): error is { statusText?: string; message?: string } {
     return (
       typeof error === "object" &&
       error !== null &&
@@ -35,8 +35,11 @@ const navigate = useNavigate()
         <p className="text-3xl text-white">
           {isErrorWithMessage(error) && (error.statusText || error.message)}
         </p>
-        <div  className=" mt-5  px-5 py-2 bg-white rounded-md hover:bg-gray-100" onClick={handleHome}>
-         Home
+        <div
+          className=" mt-5  px-5 py-2 bg-white rounded-md hover:bg-gray-100"
+          onClick={handleHome}
+        >
+          Home
         </div>
       </div>
     </div>

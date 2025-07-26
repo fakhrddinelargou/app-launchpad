@@ -2,22 +2,23 @@
 import {   QueryClientProvider , QueryClient } from "@tanstack/react-query"
 
 import {createBrowserRouter , RouterProvider} from 'react-router-dom'
-import Login from '../components/Login'
+import Login from '../auth/Login'
 
-import Register from '../components/Register'
-import Layout from "./Layout"
-import Dashboard from "../../pages/Dashboard"
-import ForgotPassword from "../components/forgotPassword"
-import ResetPassword from "../components/ResetPassword"
-import LayoutProfile from "./LayoutProfile"
-import ProfileInfo from "../../pages/pagesProfil/ProfileInfo"
-import EmailPassword from "../../pages/pagesProfil/EmailPassword"
-import Notifications from "../../pages/pagesProfil/Notification"
-import Businesses from "../../pages/pagesProfil/Businesses"
-import Integration from "../../pages/pagesProfil/Integration"
-import ProtectedRoute from "../components/ProtectedRoute"
-import GuestOnlyRoute from "../components/GuestOnlyRoute"
-import NotFound from "../components/NotFound"
+import Register from '../auth/Register'
+import Layout from "../auth/Layout"
+
+import ForgotPassword from "../auth/forgotPassword"
+import ResetPassword from "../auth/ResetPassword"
+import LayoutProfile from "../auth/LayoutProfile"
+import ProfileInfo from "../pages/pagesProfil/ProfileInfo"
+import EmailPassword from "../pages/pagesProfil/EmailPassword"
+import Notifications from "../pages/pagesProfil/Notification"
+import Businesses from "../pages/pagesProfil/Businesses"
+import Integration from "../pages/pagesProfil/Integration"
+import ProtectedRoute from "./ProtectedRoute"
+import GuestOnlyRoute from "./GuestOnlyRoute"
+import NotFound from "../pages/NotFound"
+import Dashboard from "../pages/Dashboard"
 
 const router = createBrowserRouter([
       {
@@ -65,10 +66,14 @@ element :
  children:[
   {
 path:"analytics/dashboard",
-element:
-<ProtectedRoute>
-  <Dashboard/>
-</ProtectedRoute>
+
+  element: 
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+ 
+  
+
 
   },
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import PostExpense from "./PostExpense";
 import PutExpenses from "./PutExpenses";
 import { TbPointFilled } from "react-icons/tb";
-import type { Expense } from "./typeExpenses";
+import type { Expense } from "../../types/typeExpenses";
 
 
 
