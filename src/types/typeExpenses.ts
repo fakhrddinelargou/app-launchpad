@@ -3,7 +3,7 @@ export type Expense = {
   userId: string;
   amount: string;
   description: string;
-  category: "food" | "rent" | "travel" | "other" | "utilities";
+  category: "food"| "entertainment" | "health" | "other" |  "travel" | "tech";
   date: string;
   createdAt: string;
   updatedAt: string;

@@ -22,7 +22,9 @@ const schema = z.object({
       message: "Amount must be a number greater than 0",
     }),
   description: z.string().min(1, "Description is required"),
-  category: z.enum(["food", "rent", "travel", "other", "utilities"]),
+  
+
+  category: z.enum(["food", "entertainment", "health", "other", "travel" ,"tech"]),
   date: z.string().min(1, "Date is required"),
 });
 
@@ -80,11 +82,14 @@ queryClient .invalidateQueries({ queryKey: ["expenses"] })
         <select
           
           {...register("category")}
-          className="bg-gray-200 w-full p-1 outline-none  rounded-[.3rem] "
+          className="bg-gray-200 w-full p-1 outline-none   rounded-[.3rem] "
         >
-          <option  value="food">Food</option>
-          <option  value="rent">Rent</option>
-          <option  value="travel">Travel</option>
+          <option className="text-[1rem]"  value="food">Food</option>
+          <option className="text-[1rem]"  value="entertainment">Entertainment</option>
+          <option className="text-[1rem]"  value="travel">Travel</option>
+          <option className="text-[1rem]"  value="health">Health</option>
+            <option  value="tech">Tech</option>
+
           <option  value="other">Other</option>
         </select>
         <div className=" h-5 text-[.8rem] text-red-600 font-medium">
