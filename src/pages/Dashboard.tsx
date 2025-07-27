@@ -73,13 +73,7 @@ function Dashboard() {
     getDashboard.mutateAsync();
   }, []);
 
-  if (!data) {
-    return (
-      <div className="flex items-center justify-center h-[92vh] text-8xl font-bold text-gray-200 w-full">
-        <span>404</span>
-      </div>
-    );
-  }
+
 
   return (
     <div className="w-[100%] h-auto mb-3 flex flex-col items-center gap-5    ">
