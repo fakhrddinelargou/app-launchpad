@@ -1,47 +1,39 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod'; 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-
-type FieldValues = z.infer <typeof schema>
+type FieldValues = z.infer<typeof schema>;
 const schema = z.object({
   email: z.string().email(),
-  password:z.string().min(8).max(30)
+  password: z.string().min(8).max(30),
 });
 const Login = () => {
-  // const getData  = useQuery<FieldValues>({
-  //   queryKey : ["user"],
-  //   queryFn : () => fetch("http://localhost:3000/api/auth/login").then((res) => res.json())
-  // })
-  const [error , setError] = useState(false)
-  const navigate = useNavigate()
-const handleRegister = ()=>{
-navigate("/register")
-}
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+  const handleRegister = () => {
+    navigate("/register");
+  };
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FieldValues>({
-    resolver :zodResolver(schema)
+    resolver: zodResolver(schema),
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-  const response =  await  creatNewLogin.mutateAsync(data);
-  if(response.error){
-    
-    setError(true)
-    setTimeout(()=>{
-      setError(false)
-    },2000)
-  }else{
-
-    navigate("/analytics/dashboard")
-  }
+    const response = await creatNewLogin.mutateAsync(data);
+    if (response.error) {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 2000);
+    } else {
+      navigate("/analytics/dashboard");
+    }
     return data;
   };
 
@@ -59,16 +51,13 @@ navigate("/register")
     },
   });
 
-
-
-
   return (
     <div className="w-screen  h-screen flex items-center justify-center">
-           {error && ( 
-     <div className="top-20  border-1 border-gray-200  flex items-center justify-center bg-gray-200  w-[20%]  rounded-xl absolute h-30">
-      <span className="text-xl font-medium  ">Invalid credentials</span>
-     </div>
-     )}
+      {error && (
+        <div className="top-20  border-1 border-gray-200  flex items-center justify-center bg-gray-200  w-[20%]  rounded-xl absolute h-30">
+          <span className="text-xl font-medium  ">Invalid credentials</span>
+        </div>
+      )}
       <form
         className=" flex flex-col pt-5 px-10 bg-white rounded-[.5rem] w-[35%] shadow-gray-200 shadow-sm"
         onSubmit={handleSubmit(onSubmit)}
@@ -100,9 +89,9 @@ navigate("/register")
           />
           <div className="pl-1 h-[3vh] text-[.8rem] flex justify-between ">
             <Link to={"/request-password"}>
-            <div className="text-gray-500 text-[.6rem] pt-1 cursor-pointer hover:underline">
-              Forgot Password?
-            </div>
+              <div className="text-gray-500 text-[.6rem] pt-1 cursor-pointer hover:underline">
+                Forgot Password?
+              </div>
             </Link>
             {errors.password && (
               <div className="text-red-600 pr-1">{errors.password.message}</div>
@@ -111,20 +100,29 @@ navigate("/register")
         </label>
 
         <button
-    
           type="submit"
           disabled={isSubmitting}
-          className="w-full cursor-pointer bg-blue-800 transition-colors text-white py-2 rounded-[.25rem]  hover:bg-blue-900"
-          >
-          {isSubmitting ? "Loading..." : "Login"}
+          className="w-full cursor-pointer bg-blue-800 transition-colors flex items-center justify-center  text-white py-2 rounded-[.25rem]  hover:bg-blue-900"
+        >
+          {!isSubmitting ? (
+            "save"
+          ) : (
+            <div className="flex items-center gap-2">
+              <div className="w-5 h-5 border-2 border-t-blue-500 border-gray-300 rounded-full animate-spin"></div>
+              Loading
+            </div>
+          )}
         </button>
-          
+
         <div className="text-[.7rem] text-center pt-5 pb-6  w-full text-gray-700">
           NewUser?
           <Link to={"/register"}>
-          <span onClick={handleRegister}  className="font-medium text-black cursor-pointer">
-            Register
-          </span>
+            <span
+              onClick={handleRegister}
+              className="font-medium text-black cursor-pointer"
+            >
+              Register
+            </span>
           </Link>
         </div>
       </form>

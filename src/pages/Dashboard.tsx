@@ -1,36 +1,29 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {  CalendarOff} from "lucide-react";
-import { useState, useEffect } from "react";
+import { CalendarOff } from "lucide-react";
+import { useEffect, useState } from "react";
 import BudgetForm from "../components/Budgets/BudGets";
-import {  ResponsiveContainer } from "recharts";
-import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area,  } from 'recharts';
-
+import { ResponsiveContainer } from "recharts";
+import {
+  AreaChart,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Area,
+} from "recharts";
 
 import { TbPointFilled } from "react-icons/tb";
 import EditBudgets from "../components/Budgets/EditBudgets";
 import Expenses from "../components/Expenses/Expenses";
 import type { Budget } from "../types/typeBudgets";
+import GenericDialog from "../components/common/GenericDialog";
 // import type { DashboardType } from "../types/typeDashboard";
 
-
-
-
-
 function Dashboard() {
-
-
-
-  
   const queryClient = useQueryClient();
-  const [budget, setBudget] = useState(false);
-  const [edit, setEdit] = useState(false);
-
+  const [budget, setBudget] = useState<Budget>();
+  const [isBudgetFormOpen, setIsBudgetFormOpen] = useState(false);
   const [id, setId] = useState("");
-  const [put, setPut] = useState<Budget | null>(null);
-
-  // console.log(dataDashboard);
-
-
   const token = localStorage.getItem("token");
   const { data } = useQuery<Budget[]>({
     queryKey: ["budgets"],
@@ -73,13 +66,21 @@ function Dashboard() {
     getDashboard.mutateAsync();
   }, []);
 
-
+  const closeEditBudget = () => {
+    setBudget(undefined);
+  };
+  console.log(isBudgetFormOpen);
+ 
+  const closeBudgetForm = () => setIsBudgetFormOpen(false);
 
   return (
     <div className="w-[100%] h-auto mb-3 flex flex-col items-center gap-5    ">
-      {edit && <EditBudgets getData={put} setEdit={setEdit} />}
-
-      {budget && <BudgetForm setBudget={setBudget} />}
+      <GenericDialog isOpen={!!budget} close={closeEditBudget}>
+        <EditBudgets budget={budget} close={closeEditBudget} />
+      </GenericDialog>
+      <GenericDialog isOpen={isBudgetFormOpen} close={closeBudgetForm}>
+        <BudgetForm close={closeBudgetForm} />
+      </GenericDialog>
 
       <h1 className="font-bold text-3xl p-5 text-blue-950  border-b-1 border-gray-200 mr-auto mx-2 w-full  ">
         Dashboard
@@ -90,7 +91,7 @@ function Dashboard() {
           <div className="  font-medium flex items-center w-full justify-between text-[.8rem] px-5">
             <span className="text-gray-600">Budgets :</span>
             <div
-              onClick={() => setBudget(true)}
+              onClick={() => setIsBudgetFormOpen(true)}
               className="bg-blue-600 p-2 px-3 hover:bg-blue-700 cursor-pointer text-white rounded-4xl"
             >
               + Create New Budgets
@@ -114,7 +115,7 @@ function Dashboard() {
                   </thead>
                   <tbody>
                     {data &&
-                      data.map((item, index: number) => (
+                      data.map((item) => (
                         <tr
                           key={item.id}
                           className="  h-[3rem]  hover:bg-gray-200 text-[.9rem] "
@@ -141,8 +142,7 @@ function Dashboard() {
                           <td
                             className="py-2 px-10 text-black/50 cursor-pointer"
                             onClick={() => {
-                              setPut(data[index]);
-                              setEdit(true);
+                              setBudget(item);
                             }}
                           >
                             Edit
@@ -244,7 +244,6 @@ function Dashboard() {
             </AreaChart>
           </ResponsiveContainer>
         </div>
-     
       </div>
     </div>
   );

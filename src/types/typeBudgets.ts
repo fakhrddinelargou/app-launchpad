@@ -3,7 +3,7 @@
  export type Budget = {
   id: string;
   userId: string;
-  category: string;
+  category: "food" | "rent" | "travel" | "other";
   amount: number;
   month: string; 
   spent: number;

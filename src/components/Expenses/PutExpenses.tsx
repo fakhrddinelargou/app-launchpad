@@ -5,14 +5,15 @@ import { IoIosClose } from "react-icons/io";
 import z from "zod";
 import type { Expense } from "../../types/typeExpenses";
 
+
 type Props = {
-  data: Expense;
-  value: any;
+  expenses?: Expense;
+close : ()=> void
 };
 
-export default function PutExpenses({ data, value }: Props) {
-  console.log(data.date);
-  const formattedDate = data.date ? data.date.slice(0, 7) : "";
+export default function PutExpenses({expenses , close }: Props) {
+
+  const formattedDate = expenses?.date ? expenses?.date.slice(0, 7) : "";
   const queryClient = useQueryClient();
 
   const schema = z.object({
@@ -45,24 +46,24 @@ export default function PutExpenses({ data, value }: Props) {
   } = useForm<Expen>({
     resolver: zodResolver(schema),
     defaultValues: {
-      description: data.description,
-      amount: data.amount,
-      category: data.category,
+      description: expenses?.description,
+      amount: expenses?.amount,
+      category: expenses?.category,
       date: formattedDate,
     },
   });
 
   const onSubmit: SubmitHandler<Expen> = async (response) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(response);
-    PostExpenses.mutate(response);
-    value(false);
+
+
+  await  PostExpenses.mutateAsync(response);
+
   };
 
   const token = localStorage.getItem("token");
   const PostExpenses = useMutation({
     mutationFn: (response: Expen) =>
-      fetch(`http://localhost:3000/api/expenses/${data.id}`, {
+      fetch(`http://localhost:3000/api/expenses/${expenses?.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -77,14 +78,14 @@ export default function PutExpenses({ data, value }: Props) {
   });
 
   return (
-    <div className="fixed top-0 left-0 h-auto min-h-full z-17  w-screen  flex items-center justify-center">
+  
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="max-w-md mx-auto bg-white  p-6 rounded-2xl shadow-lg space-y-2"
       >
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold text-gray-800">Expense Entry</h2>
-          <IoIosClose size={30} onClick={() => value(false)} />
+          <IoIosClose size={30} onClick={close} />
         </div>
 
         <div className="space-y-2  ">
@@ -158,11 +159,15 @@ export default function PutExpenses({ data, value }: Props) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition"
+          className="w-full bg-blue-600 text-white flex items-center justify-center py-2 rounded-xl hover:bg-blue-700 transition"
         >
-          {isSubmitting ? "...saving" : "Save Budget"}
+          {!isSubmitting ? "save" : <div className="flex items-center gap-2" >
+            <div
+  className="w-5 h-5 border-2 border-t-blue-500 border-gray-300 rounded-full animate-spin"
+></div>saving
+          </div> }
         </button>
       </form>
-    </div>
+ 
   );
 }

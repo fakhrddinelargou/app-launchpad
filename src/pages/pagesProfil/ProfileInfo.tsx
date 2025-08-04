@@ -48,9 +48,7 @@ function ProfileInfo() {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = async (response) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    putProfile.mutate(response);
+  await  putProfile.mutateAsync(response);
   };
 
   return (
